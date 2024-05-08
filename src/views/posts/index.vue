@@ -41,6 +41,17 @@
     })
 
     };
+
+    // Method to confirm delete using JavaScript's built-in confirmation dialog
+    const confirmDelete = (postId) => {
+        // Use window.confirm() to show a browser-native confirmation dialog
+        const confirmResult = window.confirm('Are you sure you want to delete this data?');
+        
+        // If user confirms deletion, proceed with delete
+        if (confirmResult) {
+            deletePost(postId);
+        }
+    };
 </script>
 
 <template>
@@ -75,7 +86,7 @@
                                     <td>{{ post.content }}</td>
                                     <td class="text-center">
                                         <router-link :to="{ name: 'posts.edit', params:{id: post.id} }" class="btn btn-sm btn-primary rounded-sm shadow border-0 me-2">EDIT</router-link>
-                                        <button @click.prevent="deletePost(post.id)" class="btn btn-sm btn-danger rounded-sm shadow border-0">DELETE</button>
+                                        <button @click.prevent="confirmDelete(post.id)" class="btn btn-sm btn-danger rounded-sm shadow border-0">DELETE</button>
                                     </td>
                                 </tr>
                             </tbody>
