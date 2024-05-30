@@ -19,21 +19,25 @@ const routes = [
             name: 'dashboard',
             component: () =>
                 import( /* webpackChunkName: "Auth" */ "../views/dashboard/Index.vue"),
+            meta: { requiresAuth: true },
         },
         {
             path: '/posts',
             name: 'posts.index',
-            component: () => import( /* webpackChunkName: "index" */ '../views/posts/index.vue')
+            component: () => import( /* webpackChunkName: "index" */ '../views/posts/index.vue'),
+            meta: { requiresAuth: true },
         },
         {
             path: '/create',
             name: 'posts.create',
-            component: () => import( /* webpackChunkName: "create" */ '../views/posts/create.vue')
+            component: () => import( /* webpackChunkName: "create" */ '../views/posts/create.vue'),
+            meta: { requiresAuth: true },
         },
         {
             path: '/edit/:id',
             name: 'posts.edit',
-            component: () => import( /* webpackChunkName: "edit" */ '../views/posts/edit.vue')
+            component: () => import( /* webpackChunkName: "edit" */ '../views/posts/edit.vue'),
+            meta: { requiresAuth: true },
         }
     ]
 
@@ -41,6 +45,15 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(),
     routes,
-  });
+});
+
+router.beforeEach((to, from, next) => {
+    const loggedIn = localStorage.getItem('loggedIn');
+    if (to.matched.some(record => record.meta.requiresAuth) && !loggedIn) {
+      next({ name: 'login' });
+    } else {
+      next();
+    }
+});
 
 export default router

@@ -2,20 +2,7 @@
     <div class="dashboard" style="margin-top:80px">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            MAIN MENU
-                            <hr>
-                            <ul class="list-group">
-                                <router-link :to="{name: 'dashboard'}" class="list-group-item text-dark text-decoration-none">DASHBOARD</router-link>
-                                <router-link :to="{name: 'posts.index'}" class="list-group-item text-dark text-decoration-none">POSTS</router-link>
-                                <li @click="logout" class="list-group-item text-dark text-decoration-none" style="cursor:pointer">LOGOUT</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
                             DASHBOARD
@@ -60,11 +47,14 @@ export default {
             axios.get('http://localhost:8000/api/logout')
             .then(() => {
                 //remove localStorage
-                localStorage.removeItem("loggedIn")    
+                localStorage.removeItem("loggedIn");
+                localStorage.removeItem('token');    
 
+                this.loggedIn = null;
+                this.token = null;
 
                 //redirect
-                return this.$router.push({ name: 'login' })
+                return this.$router.push({ name: 'home' })
             })
         }
     },
