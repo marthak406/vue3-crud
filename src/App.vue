@@ -37,6 +37,7 @@
           <ul class="navbar-nav mr-auto">
             <router-link :to="{ name: 'dashboard' }" class="nav-link">DASHBOARD</router-link>
             <router-link :to="{ name: 'posts.index' }" class="nav-link">POSTS</router-link>
+            <router-link :to="{ name: 'users.index' }" class="nav-link">USERS</router-link>
             <li class="nav-item" @click="logout" style="cursor: pointer">
               <a class="nav-link">LOGOUT</a>
             </li>
@@ -72,7 +73,7 @@ export default {
 
   computed: {
     isCmsRoute() {
-      const cmsRoutes = ['/dashboard', '/posts', '/create'];
+      const cmsRoutes = ['/dashboard', '/posts', '/create', '/users'];
       const routePath = this.$route.path;
       return cmsRoutes.includes(routePath) || routePath.startsWith('/edit');
     }

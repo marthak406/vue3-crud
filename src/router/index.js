@@ -38,7 +38,25 @@ const routes = [
             name: 'posts.edit',
             component: () => import( /* webpackChunkName: "edit" */ '../views/posts/edit.vue'),
             meta: { requiresAuth: true },
-        }
+        },
+        {
+            path: '/users',
+            name: 'users.index',
+            component: () => import( /* webpackChunkName: "index" */ '../views/users/index.vue'),
+            meta: { requiresAuth: true },
+        },
+        {
+            path: '/users/create',
+            name: 'users.create',
+            component: () => import( /* webpackChunkName: "create" */ '../views/users/create.vue'),
+            meta: { requiresAuth: true },
+        },
+        {
+            path: '/users/edit/:id',
+            name: 'users.edit',
+            component: () => import( /* webpackChunkName: "edit" */ '../views/users/edit.vue'),
+            meta: { requiresAuth: true },
+        },
     ]
 
 //create router instance
